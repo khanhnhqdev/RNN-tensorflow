@@ -2,36 +2,50 @@ import tensorflow.compat.v1 as tf
 import pandas as pd 
 import numpy as np 
 import random
+from os import listdir
+from os.path import  isfile
+import re
+from collections import defaultdict
+from process_data import * 
+from DataReader import *
 
+MAX_DOC_LENGTH = 500
+unknown_ID = 0
+padding_ID = 1 
+NUM_CLASSES=20
 class RNN :
+    
     def __init__(self, vocab_size, embedding_size, lstm_size, batch_size):
-        self._vocab_size= vocab_size
-        self._embedding_size= embedding_size
-        self._lstm_size= lstm_size
-        self._batch_size= batch_size
+        self._vocab_size = vocab_size
+        self._embedding_size = embedding_size
+        self._lstm_size = lstm_size
+        self._batch_size = batch_size
 
-        self._data= tf.placeholder(tf.int32, shape=[batch_size,MAX_DOC_LENGTH])
-        self._labels= tf.placeholder(tf.int32, shape=[batch_size,])
-        self._sentence_lengths= tf.placeholder(tf.int32, shape=[batch_size,])
-        self._final_tokens= tf.placeholder(tf.int32, shape=[batch_size,])
+        self._data = tf.placeholder(tf.int32, shape=[batch_size, MAX_DOC_LENGTH])
+        self._labels = tf.placeholder(tf.int32, shape=[batch_size,])
+        self._sentence_lengths = tf.placeholder(tf.int32, shape=[batch_size,])
 
     def embedding_layer(self, indices):
         pretrain_vectors= []
         pretrain_vectors.append(np.zeros(self._embedding_size))
         np.random.seed(2020)
-        for i in range(self._vocab_size +1):
+        for i in range(self._vocab_size + 1):
             pretrain_vectors.append(np.random.normal(
                 loc=0.,
                 scale=1.,
                 size= self._embedding_size
             ))
         pretrain_vectors= np.array(pretrain_vectors)
+
+        # tf.AUTO_REUSE: tf khong cho phep dung lai phuong thuc tf.get_variable() voi cung 1 bien, 
+        # dung reuse = tf.AUTO_REUSE cho phep dieu nay
         with tf.variable_scope("rnn_variables", reuse=tf.AUTO_REUSE) as scope:
             self._embedding_matrix= tf.get_variable(
                 name='embedding',
-                shape=(self._vocab_size +2,self._embedding_size ),
+                shape=(self._vocab_size + 2, self._embedding_size),
                 initializer= tf.constant_initializer(pretrain_vectors)
             )
+        
         return tf.nn.embedding_lookup(self._embedding_matrix, indices)
 
     def LSTM_layer(self, embeddings):
@@ -39,6 +53,8 @@ class RNN :
         zero_state= tf.zeros(shape=(self._batch_size, self._lstm_size))
         initial_state= tf.nn.rnn_cell.LSTMStateTuple(zero_state, zero_state)
 
+        # tf.transpose: ma tran chuyen vi, nhung chuyen theo dimension o trong perm: 
+        # ex: perm[1, 0, 2]: chuyen vi theo dimension 1, 0
         lstm_inputs= tf.unstack(
             tf.transpose(embeddings, perm=[1,0,2])
         )
@@ -47,13 +63,20 @@ class RNN :
             inputs= lstm_inputs,
             initial_state= initial_state,
             sequence_length= self._sentence_lengths
-        ) #danh sách gồ 500 phần tử có dạng [num_doc, lstm_size]
+        ) 
 
         lstm_outputs= tf.unstack(
             tf.transpose(lstm_outputs, perm=[1,0,2])
         )
         lstm_outputs = tf.concat(lstm_outputs, axis=0)
 
+        # tf.sequence_mask(): lengths la ma tran dau vao, neu lengths co shape la [2,3] (ma tran 2x3) thi ket qua tra ve la tensor co kich 
+        # thuoc [2,3,maxlength] (2x3xmaxlength), voi moi phan tu la true, false tuong ung voi so chi so be hon phan tu tuong ung
+        # VD: lengths = [[1, 3], [2, 0]] thi output: shape 2x2x3: [[[True, False, False],
+                                                                #    [True, True, True]],
+                                                                #    [[True, True, False],
+                                                                #    [False, False, False]]]
+        
         mask= tf.sequence_mask(
             lengths=self._sentence_lengths,
             maxlen=MAX_DOC_LENGTH,
@@ -62,7 +85,7 @@ class RNN :
         mask=tf.concat(tf.unstack(mask, axis=0), axis=0)
         mask= tf.expand_dims(mask, -1)
 
-        lstm_outputs= mask*lstm_outputs
+        lstm_outputs= mask * lstm_outputs
         lstm_outputs_splits=tf.split(lstm_outputs, num_or_size_splits=self._batch_size)
         lstm_outputs_sum=tf.reduce_sum(lstm_outputs_splits, axis=1)
         lstm_outputs_average= lstm_outputs_sum/ tf.expand_dims(
@@ -111,3 +134,62 @@ class RNN :
         with tf.variable_scope("rnn_variables", reuse=tf.AUTO_REUSE) as scope:
             train_op= tf.train.AdamOptimizer(learning_rate).minimize(loss)
         return train_op
+
+
+def train_and_evaluate_RNN():
+    '''
+    train and evaluate with RNN neural network
+    '''
+    with open('./data_set/datavocab-raw.txt') as f:
+        vocab_size= len(f.readlines())
+
+    tf.set_random_seed(2020)
+    rnn= RNN(
+        vocab_size= vocab_size,
+        embedding_size= 300,
+        lstm_size= 64,
+        batch_size=128
+    )
+    predicted_labels, loss= rnn.build_graph()
+    train_op=rnn.trainer(loss=loss, learning_rate=0.001)
+
+    with tf.Session() as sess:
+        train_data_reader, test_data_reader = load_dataset(batch_size = 128, vocab_size = vocab_size)
+        step, MAX_STEP= 0,1000 * 100
+        
+        sess.run(tf.global_variables_initializer())
+        while step < MAX_STEP:
+            next_train_batch= train_data_reader.next_batch()
+            train_data, train_labels, train_sentence_lengths = next_train_batch
+            plabel_eval, loss_eval, _= sess.run(
+                [predicted_labels, loss, train_op],
+                feed_dict={
+                    rnn._data : train_data,
+                    rnn._labels: train_labels,
+                    rnn._sentence_lengths: train_sentence_lengths,
+                }
+            )
+            step += 1
+            if step % 20==0:
+                print("step: "+ str(step)+" loss: "+ str(loss_eval))
+            
+            # Eval on test data after each epochs
+            if train_data_reader._batch_id==0: 
+                nums_true_pred=0
+                while True:
+                    next_test_batch= test_data_reader.next_batch()
+                    test_data, test_labels, test_sentence_lengths = next_test_batch
+                    test_plabel_eval, loss_eval, _ = sess.run(
+                        [predicted_labels, loss, train_op],
+                        feed_dict={
+                            rnn._data: test_data,
+                            rnn._labels: test_labels,
+                            rnn._sentence_lengths: test_sentence_lengths,
+                        }
+                    )
+                    matches= np.equal(test_plabel_eval, test_labels)
+                    nums_true_pred += np.sum(matches.astype(float))
+                    if test_data_reader._batch_id==0:
+                        break
+                print("Epoch: ",train_data_reader._num_epoch)
+                print("Accuracy on test data: ", nums_true_pred * 100./len(test_data_reader._data))
