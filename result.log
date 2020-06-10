@@ -67,3 +67,110 @@ into the labels input on backprop by default.
 
 See `tf.nn.softmax_cross_entropy_with_logits_v2`.
 
+2020-06-11 00:07:56,742 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1635: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2020-06-11 00:07:56,754 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:52: BasicLSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+2020-06-11 00:07:56,764 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:65: static_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell, unroll=True)`, which is equivalent to this API
+2020-06-11 00:07:56,784 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:735: Layer.add_variable (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.add_weight` method instead.
+2020-06-11 00:07:56,799 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:739: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-11 00:08:12,955 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:121: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+
+2020-06-11 00:17:33,697 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1635: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2020-06-11 00:17:33,737 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:52: BasicLSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+2020-06-11 00:17:33,746 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:65: static_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell, unroll=True)`, which is equivalent to this API
+2020-06-11 00:17:33,776 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:735: Layer.add_variable (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.add_weight` method instead.
+2020-06-11 00:17:33,795 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:739: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-11 00:17:49,754 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:121: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+
+2020-06-11 00:21:47,400 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1635: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2020-06-11 00:21:47,412 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:52: BasicLSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+2020-06-11 00:21:47,424 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:65: static_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell, unroll=True)`, which is equivalent to this API
+2020-06-11 00:21:47,443 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:735: Layer.add_variable (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.add_weight` method instead.
+2020-06-11 00:21:47,454 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:739: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-11 00:22:03,164 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:121: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+
+2020-06-11 00:59:59,275 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1635: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2020-06-11 00:59:59,286 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:52: BasicLSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+2020-06-11 00:59:59,289 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:65: static_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell, unroll=True)`, which is equivalent to this API
+2020-06-11 00:59:59,304 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:735: Layer.add_variable (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.add_weight` method instead.
+2020-06-11 00:59:59,320 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:739: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-11 01:00:10,448 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1635: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+2020-06-11 01:00:10,460 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:52: BasicLSTMCell.__init__ (from tensorflow.python.ops.rnn_cell_impl) is deprecated and will be removed in a future version.
+Instructions for updating:
+This class is equivalent as tf.keras.layers.LSTMCell, and will be replaced by that in Tensorflow 2.0.
+2020-06-11 01:00:10,473 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:65: static_rnn (from tensorflow.python.ops.rnn) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `keras.layers.RNN(cell, unroll=True)`, which is equivalent to this API
+2020-06-11 01:00:10,498 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:735: Layer.add_variable (from tensorflow.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+Please use `layer.add_weight` method instead.
+2020-06-11 01:00:10,514 [WARNING] From C:\Users\khanhnhq\.conda\envs\py36\lib\site-packages\tensorflow_core\python\ops\rnn_cell_impl.py:739: calling Zeros.__init__ (from tensorflow.python.ops.init_ops) with dtype is deprecated and will be removed in a future version.
+Instructions for updating:
+Call initializer instance with the dtype argument instead of passing it to the constructor
+2020-06-11 01:00:30,287 [WARNING] From D:\Ml-DS Lab\RNN\RNN.py:121: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See `tf.nn.softmax_cross_entropy_with_logits_v2`.
+

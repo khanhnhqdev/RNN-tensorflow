@@ -155,7 +155,7 @@ def train_and_evaluate_RNN():
 
     with tf.Session() as sess:
         train_data_reader, test_data_reader = load_dataset(batch_size = 128, vocab_size = vocab_size)
-        step, MAX_STEP= 0,1000 * 100
+        step, MAX_STEP= 0,1000 
         
         sess.run(tf.global_variables_initializer())
         while step < MAX_STEP:

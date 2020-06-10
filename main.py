@@ -9,13 +9,15 @@ from RNN import *
 import logging
 import sys
 # Process data from raw text:
-# gen_data_and_vocab()
-# train_path = './data_set/20news-train-raw.txt'
-# test_path  = './data_set/20news-test-raw.txt'
-# vocab_path = './data_set/datavocab-raw.txt'
-# encode_data(data_path = train_path, vocab_path = vocab_path)
-# encode_data(data_path = test_path,  vocab_path = vocab_path)
+gen_data_and_vocab()
+train_path = './data_set/20news-train-raw.txt'
+test_path  = './data_set/20news-test-raw.txt'
+vocab_path = './data_set/datavocab-raw.txt'
+encode_data(data_path = train_path, vocab_path = vocab_path)
+encode_data(data_path = test_path,  vocab_path = vocab_path)
 
+
+# write log to file
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -26,7 +28,7 @@ logging.basicConfig(
 )
 
 
-# train and evaluate with RNN
+# train and evaluate with RNN, write result to txt file
 
 f = open('output.txt','w')
 sys.stdout = f
